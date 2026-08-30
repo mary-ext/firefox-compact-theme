@@ -208,3 +208,34 @@
 #navigator-toolbox:not([tabs-hidden]) .titlebar-spacer {
   display: none !important;
 }
+
+/* Stack toolbars during customization. */
+:root[customizing] #navigator-toolbox:not([tabs-hidden])>#nav-bar {
+  order: 0 !important;
+}
+
+:root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar {
+  position: static !important;
+  flex: 0 0 100% !important;
+  height: auto !important;
+  width: auto !important;
+}
+
+:root[customizing] #navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs {
+  max-width: none !important;
+}
+
+:root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
+  display: flex !important;
+  align-items: center !important;
+}
+
+:root[customizing][customtitlebar]:not([inFullscreen]) #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
+  display: none !important;
+}
+
+:root[customizing] #navigator-toolbox:not([tabs-hidden]) #nav-bar #urlbar-container {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  margin-inline-end: 0 !important;
+}
