@@ -1,10 +1,10 @@
 :root:not(:has(#navigator-toolbox[tabs-hidden])) {
   /* Fixed address bar. */
   --uc-urlbar-width: 380px;
-  --uc-urlbar-gap: 10px;
+  --uc-urlbar-gap: var(--urlbar-margin-inline);
 
   /* Back, forward, and reload. */
-  --uc-navbuttons-width: 107px;
+  --uc-navbuttons-width: 114px;
   /* Extensions, account, menu, and padding. */
   --uc-navbar-trailing-width: 148px;
   /* Space for the new-tab button. */
@@ -66,6 +66,18 @@
   right: calc(var(--uc-navbar-trailing-width) + var(--uc-window-controls-end)) !important;
   height: var(--uc-toolbar-height) !important;
   width: auto !important;
+}
+
+/* Prefer the URL bar position over estimated widths. */
+@supports (anchor-name: --uc-urlbar) {
+  #navigator-toolbox:not([tabs-hidden]) #nav-bar #urlbar-container {
+    anchor-name: --uc-urlbar !important;
+  }
+
+  #navigator-toolbox:not([tabs-hidden])>#TabsToolbar {
+    position-anchor: --uc-urlbar !important;
+    left: calc(anchor(right) + var(--uc-urlbar-gap)) !important;
+  }
 }
 
 #navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs {
