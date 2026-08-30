@@ -1,0 +1,143 @@
+:root:not(:has(#navigator-toolbox[tabs-hidden])) {
+  /* Fixed address bar. */
+  --uc-urlbar-width: 380px;
+  --uc-urlbar-gap: 10px;
+
+  /* Back, forward, and reload. */
+  --uc-navbuttons-width: 107px;
+  /* Extensions, account, menu, and padding. */
+  --uc-navbar-trailing-width: 148px;
+  --uc-traffic-light-width: 80px;
+  /* Space for the new-tab button. */
+  --uc-tabstrip-reserve: 44px;
+
+  /* Keep the tab strip aligned with Firefox's URL bar metrics. */
+  --uc-toolbar-height: calc(var(--urlbar-height) + 2 * var(--urlbar-padding-block));
+  --uc-tabstrip-start: calc(var(--uc-traffic-light-width) + var(--uc-navbuttons-width) + var(--uc-urlbar-width) + var(--uc-urlbar-gap));
+
+  /* Firefox adds 8px of block margin to --tab-min-height. */
+  --tab-min-height: calc(var(--uc-toolbar-height) - 8px) !important;
+}
+
+/* Shared toolbar surface and positioning context. */
+#navigator-toolbox:not([tabs-hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: relative;
+
+  background-color: var(--toolbox-background-color) !important;
+}
+
+#navigator-toolbox:not([tabs-hidden]) :is(#TabsToolbar, #nav-bar) {
+  background: transparent !important;
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+#navigator-toolbox:not([tabs-hidden])>#nav-bar {
+  order: -1 !important;
+  flex: 1 1 100% !important;
+  min-width: 0 !important;
+}
+
+/* Auto margin pushes trailing controls to the window edge. */
+#navigator-toolbox:not([tabs-hidden]) #nav-bar #urlbar-container {
+  flex: 0 0 var(--uc-urlbar-width) !important;
+  min-width: 0 !important;
+  width: var(--uc-urlbar-width) !important;
+  margin-inline-end: auto !important;
+}
+
+/* Position tabs between the URL bar and trailing controls. */
+#navigator-toolbox:not([tabs-hidden])>#TabsToolbar {
+  position: absolute !important;
+  top: 0 !important;
+  left: var(--uc-tabstrip-start) !important;
+  right: var(--uc-navbar-trailing-width) !important;
+  height: var(--uc-toolbar-height) !important;
+  width: auto !important;
+}
+
+#navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs {
+  max-width: calc(100% - var(--uc-tabstrip-reserve)) !important;
+  min-height: 0 !important;
+}
+
+#navigator-toolbox:not([tabs-hidden])> :is(#toolbar-menubar, #PersonalToolbar, #notifications-toolbar) {
+  flex: 0 0 100% !important;
+}
+
+#navigator-toolbox:not([tabs-hidden])>#notifications-toolbar {
+  order: 99 !important;
+}
+
+/* Firefox duplicates traffic lights per toolbar; use the nav-bar copy. */
+@media (-moz-platform: macos) {
+  #navigator-toolbox:not([tabs-hidden])> :is(#toolbar-menubar, #TabsToolbar)>.titlebar-buttonbox-container {
+    display: none !important;
+  }
+
+  #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
+    display: flex !important;
+    align-items: center !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    z-index: 1000 !important;
+  }
+
+  :root:not([inFullscreen]) #navigator-toolbox:not([tabs-hidden])>#nav-bar {
+    box-sizing: border-box !important;
+    padding-inline-start: var(--uc-traffic-light-width) !important;
+  }
+}
+
+/* Use the nav-bar copy of Firefox's duplicated private indicator. */
+#navigator-toolbox:not([tabs-hidden])>#TabsToolbar> :is(.private-browsing-indicator-with-label, .private-browsing-indicator-button) {
+  display: none !important;
+}
+
+@media not -moz-pref("browser.nova.enabled") {
+  :root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-with-label {
+    display: flex !important;
+  }
+}
+
+@media -moz-pref("browser.nova.enabled") {
+  :root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-button {
+    display: flex !important;
+  }
+}
+
+/* Style the pre-Nova label as a badge. */
+:root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-with-label {
+  align-self: center !important;
+  height: 24px !important;
+  padding-inline: 8px !important;
+  border-radius: 999px !important;
+  background-color: color-mix(in srgb, #7338e2 30%, transparent) !important;
+}
+
+/* Keep the menu button last. */
+:root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>#PanelUI-button {
+  order: 1 !important;
+}
+
+/* Private-window trailing widths for the label and icon variants. */
+@media not -moz-pref("browser.nova.enabled") {
+  :root[privatebrowsingmode="temporary"]:not(:has(#navigator-toolbox[tabs-hidden])) {
+    --uc-navbar-trailing-width: 317px;
+  }
+}
+
+@media -moz-pref("browser.nova.enabled") {
+  :root[privatebrowsingmode="temporary"]:not(:has(#navigator-toolbox[tabs-hidden])) {
+    --uc-navbar-trailing-width: 213px;
+  }
+}
+
+#navigator-toolbox:not([tabs-hidden]) .titlebar-spacer {
+  display: none !important;
+}
