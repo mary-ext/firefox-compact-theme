@@ -4,9 +4,9 @@
   --uc-urlbar-gap: var(--urlbar-margin-inline);
 
   /* Back, forward, and reload. */
-  --uc-navbuttons-width: 114px;
+  --uc-navbuttons-width: 110px;
   /* Extensions, account, menu, and padding. */
-  --uc-navbar-trailing-width: 148px;
+  --uc-navbar-trailing-width: 144px;
   /* Space for the new-tab button. */
   --uc-tabstrip-reserve: 44px;
 
@@ -48,6 +48,16 @@
   order: -1 !important;
   flex: 1 1 100% !important;
   min-width: 0 !important;
+}
+
+/* Match toolbar and URL bar insets. */
+#navigator-toolbox:not([tabs-hidden])>#nav-bar {
+  --toolbar-padding-inline: var(--urlbar-padding-block);
+}
+
+/* Touch density uses a fixed 5px URL bar inset. */
+:root[uidensity="touch"] #navigator-toolbox:not([tabs-hidden])>#nav-bar {
+  --toolbar-padding-inline: 5px;
 }
 
 /* Auto margin pushes trailing controls to the window edge. */
@@ -207,13 +217,13 @@
 /* Private-window trailing widths for the label and icon variants. */
 @media not -moz-pref("browser.nova.enabled") {
   :root[privatebrowsingmode="temporary"]:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-navbar-trailing-width: 317px;
+    --uc-navbar-trailing-width: 313px;
   }
 }
 
 @media -moz-pref("browser.nova.enabled") {
   :root[privatebrowsingmode="temporary"]:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-navbar-trailing-width: 213px;
+    --uc-navbar-trailing-width: 209px;
   }
 }
 
