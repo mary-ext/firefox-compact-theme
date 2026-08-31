@@ -30,7 +30,7 @@ HOST = "127.0.0.1"
 PORT = int(os.environ.get("FFDEBUG_PORT", "2828"))
 BINARIES = ("firefox-developer-edition", "firefox", "firefox-nightly", "firefox-esr")
 
-# Firefox 155 toolbar baseline without the address bar's flexible springs.
+# Firefox 155 toolbar layout.
 TOOLBAR_STATE = {
     "placements": {
         "widget-overflow-fixed-list": [],
@@ -51,7 +51,6 @@ TOOLBAR_STATE = {
         "TabsToolbar": [
             "tabbrowser-tabs",
             "new-tab-button",
-            "customizableui-special-spring3",
             "alltabs-button",
             "ai-window-toggle",
         ],
@@ -69,8 +68,7 @@ TOOLBAR_STATE = {
     "dirtyAreaCache": ["nav-bar", "TabsToolbar", "vertical-tabs"],
     # Match CustomizableUI.kVersion to avoid migrations.
     "currentVersion": 26,
-    # Keep the counter past spring3 in TabsToolbar.
-    "newElementCount": 3,
+    "newElementCount": 0,
 }
 
 PREFS = {
