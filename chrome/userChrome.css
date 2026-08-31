@@ -51,6 +51,10 @@
   padding: calc((var(--uc-control-size) - 16px) / 2) !important;
 }
 
+#navigator-toolbox:not([tabs-hidden]) #nav-bar .unified-extensions-item {
+  margin-inline: 0 !important;
+}
+
 /* Auto margin pushes trailing controls to the window edge. */
 #navigator-toolbox:not([tabs-hidden]) #nav-bar #urlbar-container {
   flex: 0 0 var(--uc-urlbar-width) !important;
