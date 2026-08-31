@@ -78,21 +78,31 @@
   width: auto !important;
 }
 
-/* Prefer the URL bar position over estimated widths. */
+/* Use measured toolbar positions when supported. */
 @supports (anchor-name: --uc-urlbar) {
   #navigator-toolbox:not([tabs-hidden]) #nav-bar #urlbar-container {
     anchor-name: --uc-urlbar !important;
   }
 
+  /* First visible widget after the URL bar. */
+  #navigator-toolbox:not([tabs-hidden]) #nav-bar-customization-target>#urlbar-container~:not([hidden]):not(#urlbar-container~:not([hidden])~*) {
+    anchor-name: --uc-navbar-trailing !important;
+  }
+
   #navigator-toolbox:not([tabs-hidden])>#TabsToolbar {
     position-anchor: --uc-urlbar !important;
     left: calc(anchor(right) + var(--uc-urlbar-gap)) !important;
+    right: anchor(--uc-navbar-trailing left, calc(var(--uc-navbar-trailing-width) + var(--uc-window-controls-end))) !important;
   }
 }
 
 #navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs {
-  max-width: calc(100% - var(--uc-tabstrip-reserve)) !important;
   min-height: 0 !important;
+}
+
+/* Reserve space for the overflow new-tab button. */
+#navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs[overflow] {
+  max-width: calc(100% - var(--uc-tabstrip-reserve)) !important;
 }
 
 #navigator-toolbox:not([tabs-hidden])> :is(#toolbar-menubar, #PersonalToolbar, #notifications-toolbar) {
