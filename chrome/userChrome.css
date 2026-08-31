@@ -2,8 +2,6 @@
   /* Fixed address bar. */
   --uc-urlbar-width: 360px;
   --uc-urlbar-gap: var(--urlbar-margin-inline);
-  /* Space for the new-tab button. */
-  --uc-tabstrip-reserve: 44px;
   --uc-traffic-light-width: 80px;
 
   /* Shared toolbar metrics. */
@@ -84,11 +82,6 @@
 
 #navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs {
   min-height: 0 !important;
-}
-
-/* Reserve space for the overflow new-tab button. */
-#navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs[overflow] {
-  max-width: calc(100% - var(--uc-tabstrip-reserve)) !important;
 }
 
 #navigator-toolbox:not([tabs-hidden])> :is(#toolbar-menubar, #PersonalToolbar, #notifications-toolbar) {
@@ -184,10 +177,6 @@
   flex: 0 0 100% !important;
   height: auto !important;
   width: auto !important;
-}
-
-:root[customizing] #navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs {
-  max-width: none !important;
 }
 
 :root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
