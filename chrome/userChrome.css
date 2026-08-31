@@ -60,6 +60,14 @@
   --toolbar-padding-inline: var(--uc-control-inset);
 }
 
+/* Match tab dimensions. */
+#navigator-toolbox:not([tabs-hidden]) #nav-bar .toolbarbutton-1> :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+  box-sizing: border-box !important;
+  width: var(--uc-control-size) !important;
+  height: var(--uc-control-size) !important;
+  padding: calc((var(--uc-control-size) - 16px) / 2) !important;
+}
+
 /* Auto margin pushes trailing controls to the window edge. */
 #navigator-toolbox:not([tabs-hidden]) #nav-bar #urlbar-container {
   flex: 0 0 var(--uc-urlbar-width) !important;
