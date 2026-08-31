@@ -104,6 +104,10 @@
   }
 }
 
+#navigator-toolbox:not([tabs-hidden])>#TabsToolbar #TabsToolbar-customization-target {
+  align-self: center !important;
+}
+
 #navigator-toolbox:not([tabs-hidden]) #tabbrowser-tabs {
   min-height: 0 !important;
 }
