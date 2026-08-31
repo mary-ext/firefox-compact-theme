@@ -2,29 +2,14 @@
   /* Fixed address bar. */
   --uc-urlbar-width: 360px;
   --uc-urlbar-gap: var(--urlbar-margin-inline);
-
-  /* Back, forward, and reload. */
-  --uc-navbuttons-width: 110px;
-  /* Extensions, account, menu, and padding. */
-  --uc-navbar-trailing-width: 144px;
   /* Space for the new-tab button. */
   --uc-tabstrip-reserve: 44px;
-
-  /* Window control dimensions and placement. */
   --uc-traffic-light-width: 80px;
-  --uc-titlebar-button-width: 41px;
-  --uc-csd-minimize-width: 0px;
-  --uc-csd-maximize-width: 0px;
-  --uc-csd-close-width: 0px;
-  --uc-window-controls-width: calc(var(--uc-csd-minimize-width) + var(--uc-csd-maximize-width) + var(--uc-csd-close-width));
-  --uc-window-controls-start: 0px;
-  --uc-window-controls-end: 0px;
 
   /* Shared toolbar metrics. */
   --uc-control-size: var(--urlbar-height);
   --uc-control-inset: var(--urlbar-padding-block);
   --uc-toolbar-height: calc(var(--uc-control-size) + 2 * var(--uc-control-inset));
-  --uc-tabstrip-start: calc(var(--uc-window-controls-start) + var(--uc-navbuttons-width) + var(--uc-urlbar-width) + var(--uc-urlbar-gap));
 
   --tab-min-height: var(--uc-control-size) !important;
 }
@@ -74,34 +59,23 @@
   min-width: 0 !important;
   width: var(--uc-urlbar-width) !important;
   margin-inline-end: auto !important;
+  anchor-name: --uc-urlbar !important;
+}
+
+/* First visible widget after the URL bar. */
+#navigator-toolbox:not([tabs-hidden]) #nav-bar-customization-target>#urlbar-container~:not([hidden]):not(#urlbar-container~:not([hidden])~*) {
+  anchor-name: --uc-navbar-trailing !important;
 }
 
 /* Position tabs between the URL bar and trailing controls. */
 #navigator-toolbox:not([tabs-hidden])>#TabsToolbar {
   position: absolute !important;
+  position-anchor: --uc-urlbar !important;
   top: 0 !important;
-  left: var(--uc-tabstrip-start) !important;
-  right: calc(var(--uc-navbar-trailing-width) + var(--uc-window-controls-end)) !important;
+  left: calc(anchor(right) + var(--uc-urlbar-gap)) !important;
+  right: anchor(--uc-navbar-trailing left) !important;
   height: var(--uc-toolbar-height) !important;
   width: auto !important;
-}
-
-/* Use measured toolbar positions when supported. */
-@supports (anchor-name: --uc-urlbar) {
-  #navigator-toolbox:not([tabs-hidden]) #nav-bar #urlbar-container {
-    anchor-name: --uc-urlbar !important;
-  }
-
-  /* First visible widget after the URL bar. */
-  #navigator-toolbox:not([tabs-hidden]) #nav-bar-customization-target>#urlbar-container~:not([hidden]):not(#urlbar-container~:not([hidden])~*) {
-    anchor-name: --uc-navbar-trailing !important;
-  }
-
-  #navigator-toolbox:not([tabs-hidden])>#TabsToolbar {
-    position-anchor: --uc-urlbar !important;
-    left: calc(anchor(right) + var(--uc-urlbar-gap)) !important;
-    right: anchor(--uc-navbar-trailing left, calc(var(--uc-navbar-trailing-width) + var(--uc-window-controls-end))) !important;
-  }
 }
 
 #navigator-toolbox:not([tabs-hidden])>#TabsToolbar #TabsToolbar-customization-target {
@@ -137,10 +111,6 @@
 
 /* macOS traffic-light offset. */
 @media (-moz-platform: macos) {
-  :root:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-window-controls-start: var(--uc-traffic-light-width);
-  }
-
   #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
     position: absolute !important;
     left: 0 !important;
@@ -157,49 +127,13 @@
 
 /* Non-macOS trailing controls. */
 @media not (-moz-platform: macos) {
-  :root[customtitlebar]:not([inFullscreen]):not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-window-controls-end: var(--uc-window-controls-width);
-  }
-
   #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
     order: 100 !important;
   }
 }
 
-/* GTK window control widths. */
-@media (-moz-gtk-csd-minimize-button) {
-  :root:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-csd-minimize-width: var(--uc-titlebar-button-width);
-  }
-}
-
-@media (-moz-gtk-csd-maximize-button) {
-  :root:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-csd-maximize-width: var(--uc-titlebar-button-width);
-  }
-}
-
-@media (-moz-gtk-csd-close-button) {
-  :root:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-csd-close-width: var(--uc-titlebar-button-width);
-  }
-}
-
-@media (-moz-platform: windows) {
-  :root:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-csd-minimize-width: 46px;
-    --uc-csd-maximize-width: 46px;
-    --uc-csd-close-width: 46px;
-  }
-}
-
 /* Reversed GTK controls. */
 @media (-moz-gtk-csd-reversed-placement) {
-  :root[customtitlebar]:not([inFullscreen]):not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-window-controls-start: var(--uc-window-controls-width);
-    --uc-window-controls-end: 0px;
-  }
-
   #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
     order: -100 !important;
   }
@@ -234,19 +168,6 @@
 /* Keep the menu button last. */
 :root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>#PanelUI-button {
   order: 1 !important;
-}
-
-/* Private-window trailing widths for the label and icon variants. */
-@media not -moz-pref("browser.nova.enabled") {
-  :root[privatebrowsingmode="temporary"]:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-navbar-trailing-width: 313px;
-  }
-}
-
-@media -moz-pref("browser.nova.enabled") {
-  :root[privatebrowsingmode="temporary"]:not(:has(#navigator-toolbox[tabs-hidden])) {
-    --uc-navbar-trailing-width: 209px;
-  }
 }
 
 #navigator-toolbox:not([tabs-hidden]) .titlebar-spacer {
