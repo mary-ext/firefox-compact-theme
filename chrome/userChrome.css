@@ -20,12 +20,17 @@
   --uc-window-controls-start: 0px;
   --uc-window-controls-end: 0px;
 
-  /* Keep the tab strip aligned with Firefox's URL bar metrics. */
-  --uc-toolbar-height: calc(var(--urlbar-height) + 2 * var(--urlbar-padding-block));
+  /* Shared toolbar metrics. */
+  --uc-control-size: var(--urlbar-height);
+  --uc-control-inset: var(--urlbar-padding-block);
+  --uc-toolbar-height: calc(var(--uc-control-size) + 2 * var(--uc-control-inset));
   --uc-tabstrip-start: calc(var(--uc-window-controls-start) + var(--uc-navbuttons-width) + var(--uc-urlbar-width) + var(--uc-urlbar-gap));
 
-  /* Firefox adds 8px of block margin to --tab-min-height. */
-  --tab-min-height: calc(var(--uc-toolbar-height) - 8px) !important;
+  --tab-min-height: var(--uc-control-size) !important;
+}
+
+:root[uidensity="touch"]:not(:has(#navigator-toolbox[tabs-hidden])) {
+  --uc-control-inset: 5px;
 }
 
 /* Shared toolbar surface and positioning context. */
@@ -52,12 +57,7 @@
 
 /* Match toolbar and URL bar insets. */
 #navigator-toolbox:not([tabs-hidden])>#nav-bar {
-  --toolbar-padding-inline: var(--urlbar-padding-block);
-}
-
-/* Touch density uses a fixed 5px URL bar inset. */
-:root[uidensity="touch"] #navigator-toolbox:not([tabs-hidden])>#nav-bar {
-  --toolbar-padding-inline: 5px;
+  --toolbar-padding-inline: var(--uc-control-inset);
 }
 
 /* Auto margin pushes trailing controls to the window edge. */
