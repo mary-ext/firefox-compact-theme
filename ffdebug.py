@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Debug userChrome.css in a throwaway Firefox profile over Marionette.
 
-    ./ffdebug.py launch            # start Firefox with the debug profile
+    ./ffdebug.py launch            # start Firefox with the debug profile (blocking)
     ./ffdebug.py reload            # reload chrome/userChrome.css
-    ./ffdebug.py watch             # reload on save
+    ./ffdebug.py watch             # reload on save (blocking)
     ./ffdebug.py shot ui.png       # capture the chrome window
     ./ffdebug.py inspect '#nav-bar' '#urlbar-container'
     ./ffdebug.py check             # report rules and declarations Firefox threw away
@@ -229,6 +229,7 @@ def wait_for_port(port=PORT, timeout=45):
 
 
 def do_launch(args):
+    """Run Firefox in the foreground."""
     if running_pid() or port_open():
         sys.exit("already running -- use './ffdebug.py restart' or './ffdebug.py stop'")
     write_profile(fresh=args.fresh)
@@ -268,7 +269,7 @@ def do_launch(args):
             sheet = register_sheet(m, args.css)
         print(f"pid {proc.pid}  profile {PROFILE}  marionette {PORT}", file=sys.stderr)
         print(sheet, file=sys.stderr)
-        print("running -- ctrl-c to quit", file=sys.stderr)
+        print("running -- ctrl-c or './ffdebug.py stop' to quit", file=sys.stderr)
         proc.wait()
     except KeyboardInterrupt:
         pass
@@ -730,11 +731,11 @@ def main():
         sp.add_argument("--height", type=int)
         sp.add_argument("--css", default=SHEET)
 
-    sp = sub.add_parser("launch", help="start Firefox on the debug profile")
+    sp = sub.add_parser("launch", help="start Firefox on the debug profile (blocks)")
     launch_args(sp)
     sp.set_defaults(func=do_launch)
 
-    sp = sub.add_parser("restart", help="stop, then launch again")
+    sp = sub.add_parser("restart", help="stop, then launch again (blocks)")
     launch_args(sp)
     sp.set_defaults(func=do_restart)
 
@@ -745,7 +746,7 @@ def main():
     sp.add_argument("css", nargs="?", default=SHEET)
     sp.set_defaults(func=do_reload)
 
-    sp = sub.add_parser("watch", help="reload whenever the stylesheet changes")
+    sp = sub.add_parser("watch", help="reload whenever the stylesheet changes (blocks)")
     sp.add_argument("css", nargs="?", default=SHEET)
     sp.set_defaults(func=do_watch)
 
