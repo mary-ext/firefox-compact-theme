@@ -126,6 +126,11 @@
 		anchor-name: --uc-navbar-trailing !important;
 	}
 
+	/* Fallback anchor for an empty nav bar. */
+	> #nav-bar > #PanelUI-button {
+		anchor-name: --uc-navbar-end !important;
+	}
+
 	/* #region Tab strip */
 
 	> #TabsToolbar {
@@ -136,7 +141,7 @@
 		top: anchor(top) !important;
 		bottom: anchor(bottom) !important;
 		left: calc(anchor(right) + var(--uc-urlbar-gap)) !important;
-		right: anchor(--uc-navbar-trailing left) !important;
+		right: max(anchor(--uc-navbar-trailing left, 0px), anchor(--uc-navbar-end left, 0px)) !important;
 
 		#TabsToolbar-customization-target {
 			align-self: center !important;
