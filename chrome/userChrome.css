@@ -16,6 +16,7 @@
 
 	/* Stacked layout. */
 	--uc-stacked: 0;
+	--uc-stacked-overlap: var(--uc-control-inset);
 
 	&[customizing] {
 		--uc-stacked: 1;
@@ -272,6 +273,9 @@
 		> #TabsToolbar {
 			position: static !important;
 			flex: 0 0 100% !important;
+
+			/* Overlap row insets. */
+			margin-block-end: calc(-1 * var(--uc-stacked-overlap)) !important;
 
 			/* Align with nav-bar widgets. */
 			#TabsToolbar-customization-target {
