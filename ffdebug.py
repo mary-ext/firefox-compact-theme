@@ -28,7 +28,15 @@ PIDFILE = os.path.join(PROFILE, "ffdebug.pid")
 
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("FFDEBUG_PORT", "2828"))
-BINARIES = ("firefox-developer-edition", "firefox", "firefox-nightly", "firefox-esr")
+
+BINARIES = (
+    ("firefox-developer-edition", "Firefox Developer Edition.app"),
+    ("firefox", "Firefox.app"),
+    ("firefox-nightly", "Firefox Nightly.app"),
+    ("firefox-esr", "Firefox ESR.app"),
+)
+APP_DIRS = ("/Applications", os.path.expanduser("~/Applications"))
+BUNDLE_EXE = "Contents/MacOS/firefox"
 
 # Firefox 155 toolbar layout.
 TOOLBAR_STATE = {
@@ -173,15 +181,31 @@ def unwrap(result):
 
 # --- Process control -------------------------------------------------------
 
+def in_bundle(path):
+    if path.rstrip("/").endswith(".app") and os.path.isdir(path):
+        return os.path.join(path.rstrip("/"), BUNDLE_EXE)
+    return path
+
+
 def firefox_binary():
     override = os.environ.get("FFDEBUG_FIREFOX")
     if override:
-        return override
-    for name in BINARIES:
+        path = in_bundle(os.path.expanduser(override))
+        if not os.path.isfile(path):
+            sys.exit(f"FFDEBUG_FIREFOX is not an executable: {path}")
+        return path
+    for name, bundle in BINARIES:
         path = shutil.which(name)
         if path:
             return path
-    sys.exit("no Firefox binary found -- set FFDEBUG_FIREFOX=/path/to/firefox")
+        if sys.platform != "darwin":
+            continue
+        for directory in APP_DIRS:
+            path = os.path.join(directory, bundle, BUNDLE_EXE)
+            if os.path.isfile(path):
+                return path
+    hint = "/Applications/Firefox.app" if sys.platform == "darwin" else "/path/to/firefox"
+    sys.exit(f"no Firefox binary found -- set FFDEBUG_FIREFOX={hint}")
 
 
 def write_profile(fresh=False):
