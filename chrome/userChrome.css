@@ -31,6 +31,15 @@
 	}
 }
 
+/* #region Widget metrics */
+
+/* Keep widget insets stable on narrow windows. */
+@media (width <= 900px) {
+	:root {
+		--toolbarbutton-padding-outer: 2px !important;
+	}
+}
+
 /* #region Tab metrics */
 
 /* Exclude hidden tab strips. */
@@ -89,6 +98,9 @@
 		background: transparent !important;
 		border-top: none !important;
 		box-shadow: none !important;
+
+		/* Match toolbar button and tab heights. */
+		--toolbarbutton-padding-inner: calc((var(--uc-control-size) - 16px) / 2) !important;
 	}
 
 	> :is(#toolbar-menubar, #PersonalToolbar, #notifications-toolbar) {
@@ -114,9 +126,6 @@
 		/* Account for widget edge insets. */
 		--toolbar-padding-inline: var(--uc-widget-edge-inset);
 		padding-inline: var(--uc-toolbar-edge-padding) !important;
-
-		/* Match toolbar button and tab heights. */
-		--toolbarbutton-padding-inner: calc((var(--uc-control-size) - 16px) / 2) !important;
 
 		.unified-extensions-item {
 			margin-inline: 0 !important;
