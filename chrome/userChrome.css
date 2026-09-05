@@ -131,11 +131,12 @@
 	> #TabsToolbar {
 		position: absolute !important;
 		position-anchor: --uc-urlbar !important;
-		top: 0 !important;
+
+		/* Track the address bar in both axes. */
+		top: anchor(top) !important;
+		bottom: anchor(bottom) !important;
 		left: calc(anchor(right) + var(--uc-urlbar-gap)) !important;
 		right: anchor(--uc-navbar-trailing left) !important;
-		height: var(--uc-toolbar-height) !important;
-		width: auto !important;
 
 		#TabsToolbar-customization-target {
 			align-self: center !important;
@@ -234,8 +235,6 @@
 	> #TabsToolbar {
 		position: static !important;
 		flex: 0 0 100% !important;
-		height: auto !important;
-		width: auto !important;
 
 		/* Align with nav-bar widgets. */
 		#TabsToolbar-customization-target {
