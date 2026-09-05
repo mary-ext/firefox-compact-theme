@@ -40,6 +40,21 @@
 	}
 }
 
+#navigator-toolbox > :is(#nav-bar, #TabsToolbar) {
+	/* Match toolbar button and tab heights. */
+	--toolbarbutton-padding-inner: calc((var(--uc-control-size) - 16px) / 2) !important;
+}
+
+#navigator-toolbox > #nav-bar {
+	/* Account for widget edge insets. */
+	--toolbar-padding-inline: var(--uc-widget-edge-inset);
+	padding-inline: var(--uc-toolbar-edge-padding) !important;
+
+	.unified-extensions-item {
+		margin-inline: 0 !important;
+	}
+}
+
 /* #region Tab metrics */
 
 /* Exclude hidden tab strips. */
@@ -98,9 +113,6 @@
 		background: transparent !important;
 		border-top: none !important;
 		box-shadow: none !important;
-
-		/* Match toolbar button and tab heights. */
-		--toolbarbutton-padding-inner: calc((var(--uc-control-size) - 16px) / 2) !important;
 	}
 
 	> :is(#toolbar-menubar, #PersonalToolbar, #notifications-toolbar) {
@@ -122,14 +134,6 @@
 		order: -1 !important;
 		flex: 1 1 100% !important;
 		min-width: 0 !important;
-
-		/* Account for widget edge insets. */
-		--toolbar-padding-inline: var(--uc-widget-edge-inset);
-		padding-inline: var(--uc-toolbar-edge-padding) !important;
-
-		.unified-extensions-item {
-			margin-inline: 0 !important;
-		}
 
 		#urlbar-container {
 			/* Allow the URL bar to shrink. */
