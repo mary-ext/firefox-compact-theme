@@ -2,12 +2,20 @@
   /* Fixed address bar. */
   --uc-urlbar-width: 360px;
   --uc-urlbar-gap: var(--urlbar-margin-inline);
-  --uc-traffic-light-width: 80px;
 
   /* Shared toolbar metrics. */
   --uc-control-size: var(--urlbar-height);
   --uc-control-inset: var(--urlbar-padding-block);
   --uc-toolbar-height: calc(var(--uc-control-size) + 2 * var(--uc-control-inset));
+
+  /* macOS window controls. */
+  --uc-traffic-light-height: 14px;
+  --uc-traffic-light-width: 60px;
+  --uc-traffic-light-gap: 8px;
+
+  /* Match the window-button inset. */
+  --uc-traffic-light-inset: calc((var(--uc-toolbar-height) - var(--uc-traffic-light-height)) / 2);
+  --uc-traffic-light-reserve: calc(var(--uc-traffic-light-inset) + var(--uc-traffic-light-width) + var(--uc-traffic-light-gap));
 
   --tab-min-height: var(--uc-control-size) !important;
 }
@@ -116,9 +124,14 @@
     z-index: 1000 !important;
   }
 
+  /* Override Firefox's default inset. */
+  #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container>.titlebar-buttonbox {
+    margin-inline-start: var(--uc-traffic-light-inset) !important;
+  }
+
   :root:not([inFullscreen]) #navigator-toolbox:not([tabs-hidden])>#nav-bar {
     box-sizing: border-box !important;
-    padding-inline-start: var(--uc-traffic-light-width) !important;
+    padding-inline-start: var(--uc-traffic-light-reserve) !important;
   }
 }
 
