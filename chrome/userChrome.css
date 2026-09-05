@@ -149,25 +149,25 @@
   }
 }
 
-/* Use the nav-bar copy of Firefox's duplicated private indicator. */
-#navigator-toolbox:not([tabs-hidden])>#TabsToolbar> :is(.private-browsing-indicator-with-label, .private-browsing-indicator-button) {
+/* Use the nav-bar indicator outside customization. */
+:root:not([customizing]) #navigator-toolbox:not([tabs-hidden])>#TabsToolbar> :is(.private-browsing-indicator-with-label, .private-browsing-indicator-button) {
   display: none !important;
 }
 
 @media not -moz-pref("browser.nova.enabled") {
-  :root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-with-label {
+  :root[privatebrowsingmode="temporary"]:not([customizing]) #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-with-label {
     display: flex !important;
   }
 }
 
 @media -moz-pref("browser.nova.enabled") {
-  :root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-button {
+  :root[privatebrowsingmode="temporary"]:not([customizing]) #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-button {
     display: flex !important;
   }
 }
 
 /* Style the pre-Nova label as a badge. */
-:root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-with-label {
+:root[privatebrowsingmode="temporary"]:not([customizing]) #navigator-toolbox:not([tabs-hidden])>#nav-bar>.private-browsing-indicator-with-label {
   align-self: center !important;
   height: 24px !important;
   padding-inline: 8px !important;
@@ -176,7 +176,7 @@
 }
 
 /* Keep the menu button last. */
-:root[privatebrowsingmode="temporary"] #navigator-toolbox:not([tabs-hidden])>#nav-bar>#PanelUI-button {
+:root[privatebrowsingmode="temporary"]:not([customizing]) #navigator-toolbox:not([tabs-hidden])>#nav-bar>#PanelUI-button {
   order: 1 !important;
 }
 
