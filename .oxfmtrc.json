@@ -1,0 +1,12 @@
+{
+	"$schema": "https://unpkg.com/oxfmt/configuration_schema.json",
+	"useTabs": true,
+	"tabWidth": 2,
+	"printWidth": 110,
+	"overrides": [
+		{
+			"files": ["*.md"],
+			"options": { "printWidth": 100, "proseWrap": "always" }
+		}
+	]
+}
