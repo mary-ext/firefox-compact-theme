@@ -34,6 +34,32 @@
 			--urlbar-height: max(26px, 1.4em) !important;
 		}
 	}
+
+	/* Reduce tab close button size */
+	#tabbrowser-tabs[orient="horizontal"] .tab-close-button {
+		--uc-tab-close-surface: calc(12px + 2 * var(--uc-control-inset));
+		--uc-tab-close-bleed: calc((var(--uc-control-size) - var(--uc-tab-close-surface)) / 2);
+
+		padding: var(--uc-control-inset) !important;
+		border: var(--uc-tab-close-bleed) solid transparent !important;
+		background-clip: padding-box !important;
+
+		/* Claim the tab's whole trailing edge. */
+		block-size: var(--uc-control-size) !important;
+		inline-size: var(--uc-control-size) !important;
+		margin-inline-end: calc(-1 * var(--tab-inline-padding)) !important;
+
+		/* Preserve the default radius. */
+		border-radius: calc(var(--tab-border-radius) - 3px + var(--uc-tab-close-bleed)) !important;
+
+		/* Leave room for the label. */
+		@media not (forced-colors) {
+			.tabbrowser-tab:not([labelendaligned], [tab-note], :hover) > .tab-stack > .tab-content > & {
+				padding-inline-start: 0 !important;
+				inline-size: calc(var(--uc-control-size) - var(--uc-control-inset)) !important;
+			}
+		}
+	}
 }
 
 /* #region Toolbar row */
