@@ -124,12 +124,12 @@
     z-index: 1000 !important;
   }
 
-  /* Override Firefox's default inset. */
-  #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container>.titlebar-buttonbox {
+  /* Override the default inset on both copies. */
+  #navigator-toolbox:not([tabs-hidden])> :is(#nav-bar, #TabsToolbar)>.titlebar-buttonbox-container>.titlebar-buttonbox {
     margin-inline-start: var(--uc-traffic-light-inset) !important;
   }
 
-  :root:not([inFullscreen]) #navigator-toolbox:not([tabs-hidden])>#nav-bar {
+  :root:not([inFullscreen]):not([customizing]) #navigator-toolbox:not([tabs-hidden])>#nav-bar {
     box-sizing: border-box !important;
     padding-inline-start: var(--uc-traffic-light-reserve) !important;
   }
