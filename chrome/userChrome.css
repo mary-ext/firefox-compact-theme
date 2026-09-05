@@ -1,6 +1,6 @@
 :root:not(:has(#navigator-toolbox[tabs-hidden])) {
   /* Fixed address bar. */
-  --uc-urlbar-width: 360px;
+  --uc-urlbar-width: 350px;
   --uc-urlbar-gap: var(--urlbar-margin-inline);
 
   /* Shared toolbar metrics. */
