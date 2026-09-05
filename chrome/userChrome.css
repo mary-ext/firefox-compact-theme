@@ -10,20 +10,14 @@
 
 	/* macOS window controls. */
 	--uc-traffic-light-height: 14px;
-	--uc-traffic-light-width: 60px;
-	--uc-traffic-light-gap: 8px;
+	--uc-traffic-light-inset: calc((var(--uc-toolbar-height) - var(--uc-traffic-light-height)) / 2);
+	--uc-traffic-light-gap: var(--uc-traffic-light-inset);
 
 	/* Widget edge inset. */
 	--uc-widget-edge-inset: 2px;
 
 	/* Remaining toolbar edge padding. */
 	--uc-toolbar-edge-padding: calc(var(--uc-control-inset) - var(--uc-widget-edge-inset));
-
-	/* Match the window-button inset. */
-	--uc-traffic-light-inset: calc((var(--uc-toolbar-height) - var(--uc-traffic-light-height)) / 2);
-	--uc-traffic-light-reserve: calc(
-		var(--uc-traffic-light-inset) + var(--uc-traffic-light-width) + var(--uc-traffic-light-gap)
-	);
 
 	--tab-min-height: var(--uc-control-size) !important;
 }
@@ -147,13 +141,12 @@
 
 /* macOS traffic-light offset. */
 @media (-moz-platform: macos) {
+	/* Keep controls in flow. */
 	#navigator-toolbox:not([tabs-hidden]) > #nav-bar > .titlebar-buttonbox-container {
-		position: absolute !important;
-		left: 0 !important;
-		top: 0 !important;
-		bottom: 0 !important;
-		z-index: 1000 !important;
+		order: -1 !important;
 		align-items: center !important;
+		margin-inline: calc(-1 * var(--uc-toolbar-edge-padding))
+			calc(var(--uc-traffic-light-gap) - var(--uc-widget-edge-inset)) !important;
 	}
 
 	/* Override the default inset on both copies. */
@@ -162,11 +155,6 @@
 		> .titlebar-buttonbox-container
 		> .titlebar-buttonbox {
 		margin-inline-start: var(--uc-traffic-light-inset) !important;
-	}
-
-	:root:not([inFullscreen]):not([customizing]) #navigator-toolbox:not([tabs-hidden]) > #nav-bar {
-		box-sizing: border-box !important;
-		padding-inline-start: calc(var(--uc-traffic-light-reserve) + var(--uc-toolbar-edge-padding)) !important;
 	}
 }
 
@@ -263,7 +251,7 @@
 @media (-moz-platform: macos) {
 	:root[customizing] #navigator-toolbox:not([tabs-hidden]) > #TabsToolbar > .titlebar-buttonbox-container {
 		align-items: center !important;
-		margin-inline-end: var(--uc-traffic-light-gap) !important;
+		margin-inline-end: calc(var(--uc-traffic-light-gap) - var(--uc-control-inset)) !important;
 	}
 }
 
