@@ -232,37 +232,6 @@
 	}
 }
 
-/* #region Private browsing indicator */
-
-:root[privatebrowsingmode="temporary"]:not([customizing]) #navigator-toolbox:not([tabs-hidden]) {
-	> #TabsToolbar > :is(.private-browsing-indicator-with-label, .private-browsing-indicator-button) {
-		display: none !important;
-	}
-
-	> #nav-bar > #PanelUI-button {
-		order: 1 !important;
-	}
-
-	@media -moz-pref("browser.nova.enabled", false) {
-		> #nav-bar > .private-browsing-indicator-with-label {
-			display: flex !important;
-
-			/* Style the label as a badge. */
-			align-self: center !important;
-			height: 24px !important;
-			padding-inline: 8px !important;
-			border-radius: 999px !important;
-			background-color: color-mix(in srgb, #7338e2 30%, transparent) !important;
-		}
-	}
-
-	@media -moz-pref("browser.nova.enabled") {
-		> #nav-bar > .private-browsing-indicator-button {
-			display: flex !important;
-		}
-	}
-}
-
 /* #region Stacked layout */
 
 @container uc-toolbox style(--uc-stacked: 1) {
@@ -290,6 +259,37 @@
 			#TabsToolbar-customization-target {
 				padding-inline: var(--uc-toolbar-edge-padding) !important;
 			}
+		}
+	}
+}
+
+/* #region Private browsing indicator */
+
+:root[privatebrowsingmode="temporary"]:not([customizing]) #navigator-toolbox:not([tabs-hidden]) {
+	> #TabsToolbar > :is(.private-browsing-indicator-with-label, .private-browsing-indicator-button) {
+		display: none !important;
+	}
+
+	> #nav-bar > #PanelUI-button {
+		order: 1 !important;
+	}
+
+	@media -moz-pref("browser.nova.enabled", false) {
+		> #nav-bar > .private-browsing-indicator-with-label {
+			display: flex !important;
+
+			/* Style the label as a badge. */
+			align-self: center !important;
+			height: 24px !important;
+			padding-inline: 8px !important;
+			border-radius: 999px !important;
+			background-color: color-mix(in srgb, #7338e2 30%, transparent) !important;
+		}
+	}
+
+	@media -moz-pref("browser.nova.enabled") {
+		> #nav-bar > .private-browsing-indicator-button {
+			display: flex !important;
 		}
 	}
 }
