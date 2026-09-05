@@ -13,6 +13,9 @@
   --uc-traffic-light-width: 60px;
   --uc-traffic-light-gap: 8px;
 
+  /* Account for the tab and button edge difference. */
+  --uc-tab-edge-correction: 2px;
+
   /* Match the window-button inset. */
   --uc-traffic-light-inset: calc((var(--uc-toolbar-height) - var(--uc-traffic-light-height)) / 2);
   --uc-traffic-light-reserve: calc(var(--uc-traffic-light-inset) + var(--uc-traffic-light-width) + var(--uc-traffic-light-gap));
@@ -199,6 +202,13 @@
 :root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
   display: flex !important;
   align-items: center !important;
+}
+
+/* Align the first tab with the first nav-bar button. */
+@media (-moz-platform: macos) {
+  :root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
+    margin-inline-end: calc(var(--uc-traffic-light-gap) + var(--uc-tab-edge-correction)) !important;
+  }
 }
 
 :root[customizing][customtitlebar]:not([inFullscreen]) #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
