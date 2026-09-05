@@ -669,10 +669,13 @@ def walk_rules(text, base=0):
         else:
             props = []
             for decl_idx, decl in split_css(body, body_at):
+                if decl.endswith("}"):
+                    continue  # Skip nested rules; recurse below.
                 m = DECL_RE.match(decl.rstrip(";"))
                 if m:
                     props.append((decl_idx, m.group(1), m.group(2)))
             yield idx, props
+            yield from walk_rules(body, body_at)
 
 
 # Scratch <style> elements reject chrome-only properties, so inspect the user sheet.
