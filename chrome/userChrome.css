@@ -263,7 +263,9 @@
 			#urlbar-container {
 				flex: 1 1 auto !important;
 				width: auto !important;
-				margin-inline-end: 0 !important;
+
+				/* Restore the default URL bar gap. */
+				margin-inline-end: var(--urlbar-margin-inline) !important;
 			}
 		}
 
