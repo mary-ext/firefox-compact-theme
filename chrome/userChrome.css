@@ -117,9 +117,10 @@
   display: none !important;
 }
 
+/* Full-height button hit area. */
 :root[customtitlebar]:not([inFullscreen]) #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
   display: flex !important;
-  align-items: center !important;
+  align-items: stretch !important;
 }
 
 /* macOS traffic-light offset. */
@@ -130,6 +131,7 @@
     top: 0 !important;
     bottom: 0 !important;
     z-index: 1000 !important;
+    align-items: center !important;
   }
 
   /* Override the default inset on both copies. */
@@ -147,6 +149,7 @@
 @media not (-moz-platform: macos) {
   #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
     order: 100 !important;
+    margin-inline: var(--uc-toolbar-edge-padding) calc(-1 * var(--uc-toolbar-edge-padding)) !important;
   }
 }
 
@@ -154,6 +157,7 @@
 @media (-moz-gtk-csd-reversed-placement) {
   #navigator-toolbox:not([tabs-hidden])>#nav-bar>.titlebar-buttonbox-container {
     order: -100 !important;
+    margin-inline: calc(-1 * var(--uc-toolbar-edge-padding)) var(--uc-toolbar-edge-padding) !important;
   }
 }
 
@@ -211,12 +215,13 @@
 
 :root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
   display: flex !important;
-  align-items: center !important;
+  align-items: stretch !important;
 }
 
 /* Align the first tab with the first nav-bar button. */
 @media (-moz-platform: macos) {
   :root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
+    align-items: center !important;
     margin-inline-end: var(--uc-traffic-light-gap) !important;
   }
 }
