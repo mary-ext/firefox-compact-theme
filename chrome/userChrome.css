@@ -30,6 +30,19 @@
   --uc-control-inset: 5px;
 }
 
+/* Restore pre-Nova toolbar metrics. */
+@media -moz-pref("browser.nova.enabled") {
+  /* Reset Nova's tab margin. */
+  :root:not(:has(#navigator-toolbox[tabs-hidden])) {
+    --tab-margin-block: 4px !important;
+  }
+
+  /* Reset Nova's compact control height. */
+  :root[uidensity="compact"]:not(:has(#navigator-toolbox[tabs-hidden])) {
+    --urlbar-height: max(26px, 1.4em) !important;
+  }
+}
+
 /* Shared toolbar surface and positioning context. */
 #navigator-toolbox:not([tabs-hidden]) {
   display: flex;
