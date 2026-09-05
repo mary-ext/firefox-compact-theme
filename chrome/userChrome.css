@@ -236,6 +236,43 @@
 	}
 }
 
+/* #region Linux window controls */
+
+@media (-moz-platform: linux) {
+	#navigator-toolbox {
+		.titlebar-buttonbox {
+			--titlebar-button-size: var(--uc-control-size) !important;
+			--titlebar-button-spacing: var(--uc-widget-edge-inset) !important;
+			--titlebar-button-end-spacing: var(--titlebar-button-spacing) !important;
+		}
+
+		.titlebar-button > .toolbarbutton-icon {
+			background-color: transparent !important;
+			border-radius: var(--toolbarbutton-border-radius) !important;
+			outline: var(--toolbarbutton-outline) !important;
+			outline-offset: var(--toolbarbutton-outline-offset) !important;
+			transition: none !important;
+		}
+
+		.titlebar-button:hover > .toolbarbutton-icon {
+			background-color: var(--toolbarbutton-background-color-hover) !important;
+			color: inherit !important;
+			outline-color: var(--toolbarbutton-outline-color-hover) !important;
+		}
+
+		.titlebar-button:hover:active > .toolbarbutton-icon {
+			background-color: var(--toolbarbutton-background-color-active) !important;
+			color: inherit !important;
+			outline-color: var(--toolbarbutton-outline-color-active) !important;
+		}
+
+		.titlebar-button:focus-visible > .toolbarbutton-icon {
+			outline: var(--focus-outline) !important;
+			outline-offset: var(--focus-outline-inset) !important;
+		}
+	}
+}
+
 /* #region Stacked layout */
 
 @container uc-toolbox style(--uc-stacked: 1) {
