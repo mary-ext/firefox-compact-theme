@@ -13,8 +13,11 @@
   --uc-traffic-light-width: 60px;
   --uc-traffic-light-gap: 8px;
 
-  /* Account for the tab and button edge difference. */
-  --uc-tab-edge-correction: 2px;
+  /* Widget edge inset. */
+  --uc-widget-edge-inset: 2px;
+
+  /* Remaining toolbar edge padding. */
+  --uc-toolbar-edge-padding: calc(var(--uc-control-inset) - var(--uc-widget-edge-inset));
 
   /* Match the window-button inset. */
   --uc-traffic-light-inset: calc((var(--uc-toolbar-height) - var(--uc-traffic-light-height)) / 2);
@@ -49,9 +52,11 @@
   min-width: 0 !important;
 }
 
-/* Match toolbar and URL bar insets. */
+/* Set widget and window-edge insets. */
 #navigator-toolbox:not([tabs-hidden])>#nav-bar {
-  --toolbar-padding-inline: var(--uc-control-inset);
+  --toolbar-padding-inline: var(--uc-widget-edge-inset);
+
+  padding-inline: var(--uc-toolbar-edge-padding) !important;
 }
 
 /* Match tab dimensions. */
@@ -134,7 +139,7 @@
 
   :root:not([inFullscreen]):not([customizing]) #navigator-toolbox:not([tabs-hidden])>#nav-bar {
     box-sizing: border-box !important;
-    padding-inline-start: var(--uc-traffic-light-reserve) !important;
+    padding-inline-start: calc(var(--uc-traffic-light-reserve) + var(--uc-toolbar-edge-padding)) !important;
   }
 }
 
@@ -199,6 +204,11 @@
   width: auto !important;
 }
 
+/* Match nav-bar edge padding. */
+:root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar #TabsToolbar-customization-target {
+  padding-inline: var(--uc-toolbar-edge-padding) !important;
+}
+
 :root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
   display: flex !important;
   align-items: center !important;
@@ -207,7 +217,7 @@
 /* Align the first tab with the first nav-bar button. */
 @media (-moz-platform: macos) {
   :root[customizing] #navigator-toolbox:not([tabs-hidden])>#TabsToolbar>.titlebar-buttonbox-container {
-    margin-inline-end: calc(var(--uc-traffic-light-gap) + var(--uc-tab-edge-correction)) !important;
+    margin-inline-end: var(--uc-traffic-light-gap) !important;
   }
 }
 
