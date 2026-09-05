@@ -110,7 +110,8 @@
 		}
 
 		#urlbar-container {
-			flex: 0 0 var(--uc-urlbar-width) !important;
+			/* Allow the URL bar to shrink. */
+			flex: 0 1 var(--uc-urlbar-width) !important;
 			min-width: 0 !important;
 			width: var(--uc-urlbar-width) !important;
 			margin-inline-end: auto !important;
