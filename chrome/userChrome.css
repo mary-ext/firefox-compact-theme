@@ -138,13 +138,11 @@
 	display: none !important;
 }
 
-/* Full-height button hit area. */
 :root[customtitlebar]:not([inFullscreen])
 	#navigator-toolbox:not([tabs-hidden])
 	> #nav-bar
 	> .titlebar-buttonbox-container {
 	display: flex !important;
-	align-items: stretch !important;
 }
 
 /* macOS traffic-light offset. */
@@ -176,6 +174,7 @@
 @media not (-moz-platform: macos) {
 	#navigator-toolbox:not([tabs-hidden]) > #nav-bar > .titlebar-buttonbox-container {
 		order: 100 !important;
+		align-items: stretch !important;
 		margin-inline: var(--uc-toolbar-edge-padding) calc(-1 * var(--uc-toolbar-edge-padding)) !important;
 	}
 }
