@@ -20,6 +20,9 @@
 	&[customizing] {
 		--uc-stacked: 1;
 	}
+	@media (width <= 900px) {
+		--uc-stacked: 1;
+	}
 
 	/* Touch density. */
 	&[uidensity="touch"] {
