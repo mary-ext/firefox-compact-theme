@@ -9,6 +9,9 @@
 	--uc-widget-edge-inset: var(--toolbarbutton-padding-outer);
 	--uc-toolbar-edge-padding: calc(var(--uc-control-inset) - var(--uc-widget-edge-inset));
 
+	/* Linux window controls. */
+	--uc-window-controls-gap: calc(var(--uc-control-size) * 0.25);
+
 	/* macOS window controls. */
 	--uc-traffic-light-height: 14px;
 	--uc-traffic-light-inset: calc((var(--uc-toolbar-height) - var(--uc-traffic-light-height)) / 2);
@@ -224,14 +227,18 @@
 		> #nav-bar > .titlebar-buttonbox-container {
 			order: 100 !important;
 			align-items: stretch !important;
-			margin-inline: var(--uc-toolbar-edge-padding) calc(-1 * var(--uc-toolbar-edge-padding)) !important;
+		}
+
+		@media not (-moz-platform: linux) {
+			> #nav-bar > .titlebar-buttonbox-container {
+				margin-inline: var(--uc-toolbar-edge-padding) calc(-1 * var(--uc-toolbar-edge-padding)) !important;
+			}
 		}
 	}
 
 	@media (-moz-gtk-csd-reversed-placement) {
 		> #nav-bar > .titlebar-buttonbox-container {
 			order: -100 !important;
-			margin-inline: calc(-1 * var(--uc-toolbar-edge-padding)) var(--uc-toolbar-edge-padding) !important;
 		}
 	}
 }
@@ -239,6 +246,21 @@
 /* #region Linux window controls */
 
 @media (-moz-platform: linux) {
+	#navigator-toolbox > :is(#nav-bar, #TabsToolbar) > .titlebar-buttonbox-container {
+		margin-inline: var(--uc-window-controls-gap) var(--uc-window-controls-inset, 0px) !important;
+	}
+
+	/* Tabs have no edge padding. */
+	#navigator-toolbox > #TabsToolbar > .titlebar-buttonbox-container {
+		--uc-window-controls-inset: var(--uc-toolbar-edge-padding);
+	}
+
+	@media (-moz-gtk-csd-reversed-placement) {
+		#navigator-toolbox > :is(#nav-bar, #TabsToolbar) > .titlebar-buttonbox-container {
+			margin-inline: var(--uc-window-controls-inset, 0px) var(--uc-window-controls-gap) !important;
+		}
+	}
+
 	#navigator-toolbox {
 		.titlebar-buttonbox {
 			--titlebar-button-size: var(--uc-control-size) !important;
