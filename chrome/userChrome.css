@@ -43,6 +43,13 @@
 	}
 }
 
+@media -moz-pref("browser.nova.enabled") {
+	/* Pre-Nova address bar height. */
+	:root[uidensity="compact"] {
+		--urlbar-height: max(26px, 1.4em) !important;
+	}
+}
+
 #navigator-toolbox > :is(#nav-bar, #TabsToolbar) {
 	/* Match toolbar button and tab heights. */
 	--toolbarbutton-padding-inner: calc((var(--uc-control-size) - 16px) / 2) !important;
@@ -67,10 +74,6 @@
 	@media -moz-pref("browser.nova.enabled") {
 		/* Pre-Nova metrics. */
 		--tab-margin-block: 4px !important;
-
-		&[uidensity="compact"] {
-			--urlbar-height: max(26px, 1.4em) !important;
-		}
 	}
 
 	/* Reduce tab close button size */
