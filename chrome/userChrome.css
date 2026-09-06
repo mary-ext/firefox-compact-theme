@@ -117,6 +117,9 @@
 	/* One shared toolbar surface. */
 	background-color: var(--toolbox-background-color) !important;
 
+	/* Drop the separator. */
+	border-bottom-style: none !important;
+
 	> :is(#nav-bar, #TabsToolbar) {
 		background: transparent !important;
 		border-top: none !important;
