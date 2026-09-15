@@ -59,11 +59,25 @@
 		}
 	}
 
+	/* Keep the open address bar background within the toolbar. */
+	:root {
+		--urlbar-background-overhang-open: min(8px, var(--uc-control-inset)) !important;
+	}
+
+	/* Inset the results by the overhang on every side. */
+	#urlbar:not([noresults]) > .urlbarView {
+		padding: var(--urlbar-background-overhang-open) 0 0 !important;
+	}
+
 	/* Border the open address bar view like other panels. */
 	#urlbar {
 		--urlbar-background-border-open: var(--urlbar-input-container-border-width) solid
 			var(--panel-border-color) !important;
 		--urlbar-background-box-shadow-open: var(--popup-box-shadow) !important;
+
+		/* Let the overhang outline the open input. */
+		--urlbar-input-container-outline-open: none !important;
+		--urlbar-input-container-outline-open-focused: none !important;
 	}
 }
 
