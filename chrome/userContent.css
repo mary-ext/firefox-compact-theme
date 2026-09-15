@@ -1,0 +1,38 @@
+/* #region Tight corners */
+
+/* Restore pre-Nova corner radii. */
+@-moz-document url-prefix("about:") {
+	@media -moz-pref("browser.nova.enabled") {
+		@media -moz-pref("uc.tight-corners") {
+			:root {
+				--border-radius-xsmall: 2px !important;
+				--border-radius-small: 4px !important;
+				--border-radius-medium: 8px !important;
+				--border-radius-xlarge: 8px !important;
+
+				--button-border-radius: var(--border-radius-medium) !important;
+				--input-search-border-radius: var(--input-text-border-radius) !important;
+				--panel-menuitem-border-radius: var(--border-radius-small) !important;
+				--popup-border-radius: var(--border-radius-medium) !important;
+			}
+
+			panel-item {
+				--panel-item-button-border-radius: 0px !important;
+			}
+
+			moz-badge {
+				--badge-border-radius: var(--border-radius-small) !important;
+			}
+
+			moz-page-nav {
+				--page-nav-button-border-radius: var(--button-border-radius) !important;
+				--page-nav-button-border-radius-focused: var(--border-radius-small) !important;
+			}
+
+			/* Settings */
+			.containers-identity-item {
+				--box-icon-border-radius: 0px !important;
+			}
+		}
+	}
+}

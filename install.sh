@@ -3,8 +3,10 @@
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SHEET="$REPO/chrome/userChrome.css"
-[ -f "$SHEET" ] || { echo "missing $SHEET" >&2; exit 1; }
+SHEETS=(userChrome.css userContent.css)
+for name in "${SHEETS[@]}"; do
+  [ -f "$REPO/chrome/$name" ] || { echo "missing $REPO/chrome/$name" >&2; exit 1; }
+done
 
 if [ $# -ne 1 ]; then
   echo "usage: $0 <profile-dir>" >&2
@@ -47,16 +49,20 @@ PROFILE="$1"
 echo "profile: $PROFILE"
 
 mkdir -p "$PROFILE/chrome"
-TARGET="$PROFILE/chrome/userChrome.css"
 
-# Preserve an existing stylesheet.
-if [ -e "$TARGET" ] && [ ! -L "$TARGET" ]; then
-  BACKUP="$TARGET.backup.$(date +%Y%m%d%H%M%S)"
-  mv "$TARGET" "$BACKUP"
-  echo "existing userChrome.css moved to $(basename "$BACKUP")"
-fi
-ln -sfn "$SHEET" "$TARGET"
-echo "linked  $TARGET -> $SHEET"
+for name in "${SHEETS[@]}"; do
+  SHEET="$REPO/chrome/$name"
+  TARGET="$PROFILE/chrome/$name"
+
+  # Preserve an existing stylesheet.
+  if [ -e "$TARGET" ] && [ ! -L "$TARGET" ]; then
+    BACKUP="$TARGET.backup.$(date +%Y%m%d%H%M%S)"
+    mv "$TARGET" "$BACKUP"
+    echo "existing $name moved to $(basename "$BACKUP")"
+  fi
+  ln -sfn "$SHEET" "$TARGET"
+  echo "linked  $TARGET -> $SHEET"
+done
 
 PREF='user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);'
 if ! grep -qF "toolkit.legacyUserProfileCustomizations.stylesheets" "$PROFILE/user.js" 2>/dev/null; then

@@ -412,3 +412,92 @@
 		}
 	}
 }
+
+/* #region Tight corners */
+
+/* Restore pre-Nova corner radii. */
+@media -moz-pref("browser.nova.enabled") {
+	@media -moz-pref("uc.tight-corners") {
+		:root {
+			--border-radius-xsmall: 2px !important;
+			--border-radius-small: 4px !important;
+			--border-radius-medium: 8px !important;
+			--border-radius-xlarge: 8px !important;
+
+			--button-border-radius: var(--border-radius-medium) !important;
+			--input-search-border-radius: var(--input-text-border-radius) !important;
+			--panel-menuitem-border-radius: var(--border-radius-small) !important;
+			--popup-border-radius: var(--border-radius-medium) !important;
+
+			--urlbarview-border-radius: calc(var(--button-border-radius) + 2px) !important;
+			--urlbar-inner-border-radius: calc(var(--urlbar-border-radius) - 1px) !important;
+			--urlbarView-row-border-radius: calc(2px + var(--urlbar-inner-border-radius)) !important;
+			--urlbarView-top-pick-icon-border-radius: var(--border-radius-small) !important;
+		}
+
+		panel-item {
+			--panel-item-button-border-radius: 0px !important;
+		}
+
+		moz-badge {
+			--badge-border-radius: var(--border-radius-small) !important;
+		}
+
+		/* Address bar */
+		.urlbarView-button:where(:not(:empty):not(.urlbarView-button-result-menu)),
+		.urlbarView-splitbutton-dropmarker {
+			border-radius: var(--urlbar-inner-border-radius) !important;
+		}
+
+		.smartbar > .urlbar-background {
+			border-radius: var(--border-radius-large) !important;
+		}
+
+		/* Tabs */
+		.tab-audio-button {
+			--button-border-radius: var(--border-radius-small) !important;
+		}
+
+		.tab-group-label {
+			border-radius: calc(var(--tab-border-radius) - 2px) !important;
+		}
+
+		#tabbrowser-tabs[orient="vertical"] {
+			tab-split-view-wrapper,
+			.tab-group-label-hover-highlight {
+				border-radius: var(--tab-border-radius) !important;
+			}
+		}
+
+		.tab-group-editor-panel .tab-group-editor-swatch {
+			border-radius: var(--border-radius-medium) !important;
+		}
+
+		#tab-preview-panel {
+			--panel-padding: 0px !important;
+			--panel-border-radius: var(--border-radius-medium) !important;
+		}
+
+		/* Panels */
+		#trustpanel-graphic-section {
+			border-radius: var(--border-radius-medium) !important;
+		}
+
+		#downloadsListBox > richlistitem,
+		.downloadButton {
+			border-radius: var(--border-radius-small) !important;
+		}
+
+		#ai-action-button {
+			--button-border-radius: 7px !important;
+		}
+
+		/* Find bar */
+		.findbar-textbox,
+		.findbar-find-previous,
+		.findbar-find-next,
+		.close-icon.findbar-closebutton {
+			border-radius: var(--border-radius-small) !important;
+		}
+	}
+}
