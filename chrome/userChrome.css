@@ -121,12 +121,16 @@
 		box-shadow: none !important;
 		border-block-start: var(--border-width) solid var(--chrome-content-separator-color) !important;
 
-		:root:not([inDOMFullscreen], [inFullscreen]) #tabbrowser-tabbox:is([sidebar-shown], [sidebar-panel-open]):not([sidebar-positionend]) & {
+		:root:not([inDOMFullscreen], [inFullscreen])
+			#tabbrowser-tabbox:is([sidebar-shown], [sidebar-panel-open]):not([sidebar-positionend])
+			& {
 			border-inline-start: var(--border-width) solid var(--chrome-content-separator-color) !important;
 			border-start-start-radius: var(--border-radius-medium) !important;
 		}
 
-		:root:not([inDOMFullscreen], [inFullscreen]) #tabbrowser-tabbox:is([sidebar-positionend]:is([sidebar-shown], [sidebar-panel-open]), [ai-window-open]) & {
+		:root:not([inDOMFullscreen], [inFullscreen])
+			#tabbrowser-tabbox:is([sidebar-positionend]:is([sidebar-shown], [sidebar-panel-open]), [ai-window-open])
+			& {
 			border-inline-end: var(--border-width) solid var(--chrome-content-separator-color) !important;
 			border-start-end-radius: var(--border-radius-medium) !important;
 		}
