@@ -139,6 +139,27 @@
 	box-shadow: none !important;
 }
 
+/* Built-in themes: paint the selected tab like a panel instead of Nova's gradient outline. */
+@media -moz-pref("browser.nova.enabled") {
+	@media not ((forced-colors) or (-moz-native-theme)) {
+		:root:is([theme-in-app], :not([lwtheme])) {
+			/* Lift it off the tab strip in dark mode. */
+			--tab-background-color-selected: light-dark(
+				var(--panel-background-color),
+				color-mix(in srgb, var(--panel-background-color), white 6%)
+			) !important;
+
+			/* Scoped to tabs: the app menu's separator also paints the accent. */
+			:is(.tabbrowser-tab, #firefox-view-button) {
+				--tab-border-color-accent: linear-gradient(
+					var(--panel-border-color),
+					var(--panel-border-color)
+				) !important;
+			}
+		}
+	}
+}
+
 /* #region Toolbar row */
 
 /* Backport Nova's content border when Nova is disabled. */
