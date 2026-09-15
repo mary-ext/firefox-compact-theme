@@ -44,9 +44,19 @@
 }
 
 @media -moz-pref("browser.nova.enabled") {
-	/* Pre-Nova address bar height. */
 	:root[uidensity="compact"] {
+		/* Pre-Nova address bar height. */
 		--urlbar-height: max(26px, 1.4em) !important;
+
+		/* Keep panel corners concentric with the compact menu item inset. */
+		--panel-border-radius: calc(
+			var(--panel-menuitem-border-radius) + var(--panel-menuitem-margin-inline)
+		) !important;
+
+		/* Match the app menu banners to the panel corners. */
+		:is(#appMenu-update-banner, #appMenu-fxa-sign-in-promo, #appMenu-addon-banners > .addon-banner-item) {
+			border-radius: calc(var(--panel-border-radius) - var(--panel-separator-padding-inline)) !important;
+		}
 	}
 }
 
