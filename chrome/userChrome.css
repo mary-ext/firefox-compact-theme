@@ -58,6 +58,13 @@
 			border-radius: calc(var(--panel-border-radius) - var(--panel-separator-padding-inline)) !important;
 		}
 	}
+
+	/* Border the open address bar view like other panels. */
+	#urlbar {
+		--urlbar-background-border-open: var(--urlbar-input-container-border-width) solid
+			var(--panel-border-color) !important;
+		--urlbar-background-box-shadow-open: var(--popup-box-shadow) !important;
+	}
 }
 
 #navigator-toolbox > :is(#nav-bar, #TabsToolbar) {
