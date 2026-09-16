@@ -69,14 +69,19 @@
 		padding: var(--urlbar-background-overhang-open) 0 0 !important;
 	}
 
-	/* Match panel menu item corners, accounting for the rows' content-box backgrounds. */
-	:root[uidensity="compact"] #urlbar > .urlbarView {
-		--urlbarView-row-border-radius: calc(
-			var(--panel-menuitem-border-radius) + var(--urlbarView-row-gutter)
-		) !important;
+	/* Match the input and results panel corners. */
+	:root[uidensity="compact"] #urlbar[popover-open] {
 		--urlbar-background-border-radius: calc(
 			var(--panel-menuitem-border-radius) + var(--urlbar-background-overhang-open)
 		) !important;
+		--urlbar-background-border-top-radius-open: var(--urlbar-background-border-radius) !important;
+
+		/* Account for the rows' content-box backgrounds. */
+		> .urlbarView {
+			--urlbarView-row-border-radius: calc(
+				var(--panel-menuitem-border-radius) + var(--urlbarView-row-gutter)
+			) !important;
+		}
 	}
 
 	/* Border the open address bar view like other panels. */
