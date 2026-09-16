@@ -69,6 +69,16 @@
 		padding: var(--urlbar-background-overhang-open) 0 0 !important;
 	}
 
+	/* Match panel menu item corners, accounting for the rows' content-box backgrounds. */
+	:root[uidensity="compact"] #urlbar > .urlbarView {
+		--urlbarView-row-border-radius: calc(
+			var(--panel-menuitem-border-radius) + var(--urlbarView-row-gutter)
+		) !important;
+		--urlbar-background-border-radius: calc(
+			var(--panel-menuitem-border-radius) + var(--urlbar-background-overhang-open)
+		) !important;
+	}
+
 	/* Border the open address bar view like other panels. */
 	#urlbar {
 		--urlbar-background-border-open: var(--urlbar-input-container-border-width) solid
