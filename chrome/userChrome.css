@@ -175,6 +175,18 @@
 	}
 }
 
+/* Restore the darker Nova palette from before Firefox 157.0b3. */
+@media -moz-pref("browser.nova.enabled") {
+	@media -moz-pref("uc.darker-palette") {
+		@media not ((forced-colors) or (-moz-native-theme)) {
+			:root:is([theme-in-app], :not([lwtheme])) {
+				--toolbox-background-color: light-dark(rgb(234, 234, 237), var(--color-gray-90)) !important;
+				--toolbar-background-color: var(--background-color-box) !important;
+			}
+		}
+	}
+}
+
 /* #region Toolbar row */
 
 /* Backport Nova's content border when Nova is disabled. */
