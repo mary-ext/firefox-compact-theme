@@ -463,6 +463,18 @@
 	}
 }
 
+/* #region Tracker count */
+
+/* Drop the blocked-trackers pill when Firefox never fills in its count, e.g. after switching tabs. */
+#trust-icon-container.has-blocked-trackers:not(.breached, .insecure):has(#trust-icon-tracker-count-shortform:empty) {
+	background-color: transparent !important;
+	padding-inline-end: var(--urlbar-icon-padding) !important;
+
+	> :is(#trust-icon-tracker-count-longform-wrapper, #trust-icon-tracker-count-shortform-wrapper) {
+		display: none !important;
+	}
+}
+
 /* #region Tight corners */
 
 /* Restore pre-Nova corner radii. */
