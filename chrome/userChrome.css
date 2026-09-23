@@ -557,6 +557,10 @@
 			border-radius: var(--border-radius-medium) !important;
 		}
 
+		#PanelUI-fxa-menu-manage-account-button {
+			border-radius: var(--panel-menuitem-border-radius) !important;
+		}
+
 		#downloadsListBox > richlistitem,
 		.downloadButton {
 			border-radius: var(--border-radius-small) !important;
