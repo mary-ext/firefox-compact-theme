@@ -6,5 +6,5 @@ Firefox with a compact browser layout, collapses the tab bar and URL bar into a 
 
 Set these in `about:config`, then restart Firefox.
 
-- `uc.tight-corners` — restores pre-Nova corner radii when Nova is enabled.
+- `uc.tight-corners` — restores pre-Nova corner radii when Nova is enabled, and tightens the PDF viewer to match.
 - `uc.darker-palette` — restores Nova's darker toolbar colors from before Firefox 157.0b3.

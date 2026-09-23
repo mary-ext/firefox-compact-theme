@@ -1,3 +1,40 @@
+/* #region PDF viewer */
+
+/* Only Firefox's built-in viewer loads its stylesheet from resource://pdf.js, unlike self-hosted pdf.js. */
+
+/* Match the compact chrome panels. */
+@media -moz-pref("pdfjs.enableNova") and -moz-pref("browser.nova.enabled") {
+	:root[data-toolbar-density="compact"]:has(> head > link[href="resource://pdf.js/web/viewer.css"]) {
+		--panel-menuitem-margin-inline: 4px !important;
+		--panel-menuitem-padding-block: 6px !important;
+		--panel-menuitem-padding-inline: 8px !important;
+		--panel-menuitem-margin: 0 var(--panel-menuitem-margin-inline) !important;
+		--panel-menuitem-padding: var(--panel-menuitem-padding-block) var(--panel-menuitem-padding-inline) !important;
+
+		/* Keep panel corners concentric with the menu item inset. */
+		--panel-border-radius: calc(
+			var(--panel-menuitem-border-radius) + var(--panel-menuitem-margin-inline)
+		) !important;
+
+		.popupMenu {
+			padding-block: var(--panel-menuitem-margin-inline) !important;
+		}
+
+		/* The tools menu uses toolbar buttons instead of menu items. */
+		#secondaryToolbar {
+			padding: var(--panel-menuitem-margin-inline) !important;
+
+			.toolbarButton.labeled {
+				padding-inline-start: var(--panel-menuitem-padding-inline) !important;
+			}
+
+			.horizontalToolbarSeparator {
+				margin-block: var(--panel-menuitem-margin-inline) !important;
+			}
+		}
+	}
+}
+
 /* #region Tight corners */
 
 /* Restore pre-Nova corner radii. */
@@ -33,6 +70,24 @@
 			.containers-identity-item {
 				--box-icon-border-radius: 0px !important;
 			}
+		}
+	}
+}
+
+/* PDF viewer: match the chrome's tight corners rather than pre-Nova pdf.js. */
+@media -moz-pref("pdfjs.enableNova") and -moz-pref("browser.nova.enabled") {
+	@media -moz-pref("uc.tight-corners") {
+		:root:has(> head > link[href="resource://pdf.js/web/viewer.css"]) {
+			--border-radius-xsmall: 2px !important;
+			--border-radius-small: 4px !important;
+			--border-radius-medium: 8px !important;
+			--border-radius-xlarge: 8px !important;
+
+			--button-border-radius: var(--border-radius-medium) !important;
+			--input-text-border-radius: var(--border-radius-medium) !important;
+			--input-search-border-radius: var(--input-text-border-radius) !important;
+			--panel-menuitem-border-radius: var(--border-radius-small) !important;
+			--popup-border-radius: var(--border-radius-medium) !important;
 		}
 	}
 }
