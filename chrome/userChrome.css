@@ -134,7 +134,7 @@
 		/* Claim the tab's whole trailing edge. */
 		block-size: var(--uc-control-size) !important;
 		inline-size: var(--uc-control-size) !important;
-		margin-inline-end: calc(-1 * var(--tab-inline-padding)) !important;
+		margin-inline-end: calc(-1 * var(--tab-padding-inline)) !important;
 
 		/* Preserve the default radius. */
 		border-radius: calc(var(--tab-border-radius) - 3px + var(--uc-tab-close-bleed)) !important;
